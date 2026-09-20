@@ -2,16 +2,17 @@ package cli
 
 import (
 	"errors"
+	"flag"
 	"fmt"
 	"golang-learning/t1/geometry"
+	"io"
 	"strconv"
 	"strings"
-	"flag"
 )
 
 const (
-    shapePolygon = "polygon"
-    shapeCircle  = "circle"
+	shapePolygon = "polygon"
+	shapeCircle  = "circle"
 )
 
 func parsePoint(value string) (geometry.Point, error) {
@@ -96,13 +97,14 @@ func parseRadius(radius *float64, radiusSet *bool) func(string) error {
 }
 
 type CalculationResult struct {
-	shape string
+	shape  string
 	points []geometry.Point
 	circle geometry.Circle
 }
 
-func parseFigureCalculationArgs(args []string, operation string) (CalculationResult, error)  {
+func parseFigureCalculationArgs(args []string, operation string) (CalculationResult, error) {
 	flags := flag.NewFlagSet(operation, flag.ContinueOnError)
+	flags.SetOutput(io.Discard)
 
 	shape := flags.String("shape", "", "форма фигуры")
 

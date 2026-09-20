@@ -4,9 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"golang-learning/t1/geometry"
+	"io"
 )
 
-func area(args []string) error {
+func area(args []string, output io.Writer) error {
 	result, err := parseFigureCalculationArgs(args, "area")
 	if err != nil {
 		return fmt.Errorf("ошибка парсинга: %w", err)
@@ -16,17 +17,20 @@ func area(args []string) error {
 	case "":
 		return errors.New("не задан аргумент --shape")
 	case shapePolygon:
-
-		fmt.Printf("Площадь: %.2f\n",
+		_, err = fmt.Fprintf(output, "Площадь: %.2f\n",
 			(geometry.Polygon{Points: result.points}).Area(),
 		)
 	case shapeCircle:
-		fmt.Printf("Площадь: %.2f\n",
+		_, err = fmt.Fprintf(output, "Площадь: %.2f\n",
 			result.circle.Area(),
 		)
 
 	default:
 		return fmt.Errorf("некорретная форма %s - введите circle или polygon", result.shape)
+	}
+
+	if err != nil {
+		return fmt.Errorf("не удалось вывести площадь: %w", err)
 	}
 
 	return nil
