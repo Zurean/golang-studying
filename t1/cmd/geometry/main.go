@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"golang-learning/t1/cli"
+	"golang-learning/t1/internal/cli"
 	"os"
 )
 

@@ -3,7 +3,7 @@ package cli
 import (
 	"errors"
 	"fmt"
-	"golang-learning/t1/geometry"
+	"golang-learning/t1/internal/geometry"
 	"io"
 )
 

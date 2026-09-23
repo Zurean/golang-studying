@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"golang-learning/t1/geometry"
+	"golang-learning/t1/internal/geometry"
 )
 
 const (
